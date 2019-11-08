@@ -78,7 +78,54 @@ function is_palindrome(s) {
 }
 
 // True, true, true, false
-console.log(is_palindrome("dad"));
-console.log(is_palindrome("A man, a plan, a canal: Panama"));
-console.log(is_palindrome("1001"));
-console.log(is_palindrome("Tauhida"));
+// console.log(is_palindrome("dad"));
+// console.log(is_palindrome("A man, a plan, a canal: Panama"));
+// console.log(is_palindrome("1001"));
+// console.log(is_palindrome("Tauhida"));
+
+
+//Sort Stack
+function sortStack(stack) {
+  //create temporary stack
+  let tempStack = new Stack;
+
+  if (stack.top === null) {
+    return stack;
+  }
+
+  //while there are still items in `stack`
+  while (stack.top !== null) {
+
+    //look at top item on `stack`
+    let newestItem = stack.pop();
+    
+    console.log(peek(tempStack));
+    while (!isEmpty(tempStack) && peek(tempStack) > newestItem.value) {
+      stack.push(tempStack.pop());
+    }
+    tempStack.push(newestItem.value);
+      
+  }
+
+  while (tempStack.top !== null) {
+    stack.push(tempStack.pop().value);
+  }
+}
+
+
+function main() {
+  let numericStack = new Stack;
+  numericStack.push('1');
+  numericStack.push('5');
+  numericStack.push('3');
+  numericStack.push('8');
+  numericStack.push('7');
+  numericStack.push('2');
+  numericStack.push('4');
+  numericStack.push('6');
+  display(numericStack);
+  console.log('----------');
+  sortStack(numericStack);
+  display(numericStack);
+}
+main();
