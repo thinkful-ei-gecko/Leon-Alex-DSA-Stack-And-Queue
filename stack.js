@@ -99,12 +99,10 @@ function sortStack(stack) {
     //look at top item on `stack`
     let newestItem = stack.pop();
     
-    console.log(peek(tempStack));
-    while (!isEmpty(tempStack) && peek(tempStack) > newestItem.value) {
-      stack.push(tempStack.pop());
+    while (!!isEmpty(tempStack) && peek(tempStack).value > newestItem.value) {
+      stack.push(tempStack.pop().value);
     }
     tempStack.push(newestItem.value);
-      
   }
 
   while (tempStack.top !== null) {
