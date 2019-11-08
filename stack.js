@@ -84,6 +84,58 @@ function is_palindrome(s) {
 // console.log(is_palindrome("Tauhida"));
 
 
+//Matching Parens
+
+function matchingParens(expression) {
+  let openParens = new Stack;
+  let closeParens = new Stack;
+
+  for (let i = 0; i < expression.length; i++) {
+
+    if (expression[i] === '(') {
+
+      if (!isEmpty(closeParens)) {
+        openParens.push(i);
+      } else {
+        closeParens.pop();
+      }
+    }
+    if (expression[i] === ')') {
+      if (!isEmpty(openParens)) {
+        closeParens.push(i);
+      } else {
+        openParens.pop();
+      }
+    }
+  }
+
+  if (!isEmpty(openParens) && !isEmpty(closeParens)) {
+    console.log('You are perfect at parens.');
+    return;
+  }
+
+  let stackCycle = closeParens;
+  let missingParens = ')';
+
+  if (isEmpty(openParens)) {
+    stackCycle = openParens;
+    missingParens = '(';
+  }
+
+  while (isEmpty(stackCycle)) {
+    let i = stackCycle.pop().value;
+    console.log(`you are missing a ${missingParens} at char ${i}`);
+  }
+}
+
+//good case
+matchingParens('Once (there was (just so you know) multiple things (who knows what they were)). Everything was terrible (but it was great).');
+//bad case 1 
+matchingParens(')Once (there was (just so you know) multiple things (who knows what they were)). Everything was terrible (but it was great).');
+//bad case 2
+matchingParens('Once (there was (just so you know) multiple things (who knows what they were)).( Everything was terrible (but it was great).');
+
+
 //Sort Stack
 function sortStack(stack) {
   //create temporary stack
@@ -98,7 +150,7 @@ function sortStack(stack) {
 
     //look at top item on `stack`
     let newestItem = stack.pop();
-    
+
     while (!!isEmpty(tempStack) && peek(tempStack).value > newestItem.value) {
       stack.push(tempStack.pop().value);
     }
@@ -111,19 +163,19 @@ function sortStack(stack) {
 }
 
 
-function main() {
-  let numericStack = new Stack;
-  numericStack.push('1');
-  numericStack.push('5');
-  numericStack.push('3');
-  numericStack.push('8');
-  numericStack.push('7');
-  numericStack.push('2');
-  numericStack.push('4');
-  numericStack.push('6');
-  display(numericStack);
-  console.log('----------');
-  sortStack(numericStack);
-  display(numericStack);
-}
-main();
+// function main() {
+//   let numericStack = new Stack;
+//   numericStack.push('1');
+//   numericStack.push('5');
+//   numericStack.push('3');
+//   numericStack.push('8');
+//   numericStack.push('7');
+//   numericStack.push('2');
+//   numericStack.push('4');
+//   numericStack.push('6');
+//   display(numericStack);
+//   console.log('----------');
+//   sortStack(numericStack);
+//   display(numericStack);
+// }
+// main();
