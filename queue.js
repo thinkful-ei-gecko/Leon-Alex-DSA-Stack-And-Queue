@@ -11,16 +11,19 @@ class Queue {
     this.last = null;
   }
 
-  enqueue(item) {
-    let newNode = new _Node(item, null);  
-    let oldNode = this.last;
+  enqueue(data) {
+
+    const node = new _Node(data);
 
     if (this.first === null) {
-      this.first === newNode;
+      this.first = node;
     }
 
-    this.last = newNode;
-    oldNode.next = newNode;
+    if (this.last) {
+      this.last.next = node;
+    }
+
+    this.last = node;
   }
 
   dequeue() {
@@ -32,7 +35,7 @@ class Queue {
     const node = this.first;
     this.first = this.first.next;
 
-    if (this.last === null) {
+    if (node === this.last) {
       this.last = null;
     }
 
@@ -40,3 +43,28 @@ class Queue {
   }
 }
 
+function peek(queue) {
+  return queue.first;
+}
+
+function isEmpty(queue) {
+  return !!queue;
+}
+
+function display(queue) {
+  let curr = peek(queue);
+  while (curr !== null) {
+    console.log(curr.value);
+    curr = curr.next;
+  }
+}
+
+const starTrekQ = new Queue;
+
+starTrekQ.enqueue('Kirk');
+starTrekQ.enqueue('Spock');
+starTrekQ.enqueue('Uhura');
+starTrekQ.enqueue('Sulu');
+starTrekQ.enqueue('Chekov');
+
+display(starTrekQ);
